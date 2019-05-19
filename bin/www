@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+/* flow */
+
+const http = require('http');
+
+const config = require('../build/config').default;
+const logger = require('../build/logger').default;
+const app = require('../build/app').default;
+
+const server = http.createServer(app);
+
+logger.info('Starting server at %d', config.port);
+server.listen(config.port, () => logger.info('Running...'));
+
+module.exports = server;
