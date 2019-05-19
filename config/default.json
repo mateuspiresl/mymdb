@@ -1,4 +1,7 @@
 // Default config
 {
-  
+  "tmdb": {
+    "baseUrl": "https://api.themoviedb.org/3",
+    "requestTimeout": 10000
+  }
 }

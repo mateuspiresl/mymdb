@@ -13,6 +13,7 @@ import bodyParser from 'body-parser';
 import session from 'express-session';
 
 import config from './config';
+import moviesRouter from './controllers/movies';
 
 export default express()
   .use(compression())
@@ -30,6 +31,8 @@ export default express()
   .get('/', (req, res) => {
     res.send('Live!');
   })
+
+  .use('/movies', moviesRouter)
 
   // eslint-disable-next-line no-unused-vars
   .use((error, req, res, next) => {

@@ -41,6 +41,29 @@ const config = convict({
     env: 'SESSION_SECRET',
     arg: 'session-secret',
   },
+  tmdb: {
+    apiKey: {
+      doc: 'The TMDb API key.',
+      format: '*',
+      default: null,
+      env: 'TMBD_KEY',
+      arg: 'tmdb-key',
+    },
+    baseUrl: {
+      doc: 'The TMDb base URL.',
+      format: '*',
+      default: null,
+      env: 'TMBD_URL',
+      arg: 'tmdb-url',
+    },
+    requestTimeout: {
+      doc: 'The request timeout.',
+      format: 'nat',
+      default: 0,
+      env: 'TMBD_TIMEOUT',
+      arg: 'tmdb-timeout',
+    },
+  },
 });
 
 const env = config.get('env');
