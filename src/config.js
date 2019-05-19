@@ -1,0 +1,60 @@
+/**
+ * config.js
+ *
+ * Loads the configuration from /config considering the environment.
+ *
+ * Common configuration should be included in /config/default.json. Any other configuration should
+ * be included in the corresponding environment file. To overwrite any without changing scripts,
+ * create a file called /config/local.json and add the custom configuration there.
+ *
+ * @author Mateus Pires <mateusplpl@gmail.com>
+ *
+ * Based on https://github.com/mozilla/node-convict/blob/master/README.md
+ */
+
+/* @flow */
+
+import convict from 'convict';
+
+const CONFIG_DEFAULT = './config/default.json';
+const CONFIG_LOCAL = './config/local.json';
+
+const config = convict({
+  env: {
+    doc: 'The application environment.',
+    format: ['production', 'development', 'test'],
+    default: 'development',
+    env: 'NODE_ENV',
+    arg: 'env',
+  },
+  port: {
+    doc: 'The port to bind.',
+    format: 'port',
+    default: 0,
+    env: 'PORT',
+    arg: 'port',
+  },
+  secret: {
+    doc: 'The session secret.',
+    format: '*',
+    default: null,
+    env: 'SESSION_SECRET',
+    arg: 'session-secret',
+  },
+});
+
+const env = config.get('env');
+
+// Load default and environment configs
+config.loadFile([CONFIG_DEFAULT, `./config/${env}.json`]);
+
+// Load local config if exists
+try {
+  config.loadFile(CONFIG_LOCAL);
+} catch (_) {
+  // Ignore
+}
+
+config.validate({ allowed: 'strict' });
+
+export default config.getProperties();
