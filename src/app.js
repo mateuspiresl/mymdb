@@ -29,4 +29,15 @@ export default express()
 
   .get('/', (req, res) => {
     res.send('Live!');
+  })
+
+  // eslint-disable-next-line no-unused-vars
+  .use((error, req, res, next) => {
+    const { statusCode, ...errorData } = error;
+
+    if (statusCode || config.env !== 'production') {
+      res.status(error.statusCode || 500).json(errorData);
+    } else {
+      res.status(500).send('Server Error');
+    }
   });

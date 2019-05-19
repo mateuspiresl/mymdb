@@ -12,6 +12,8 @@
 import type { $Request, $Response, NextFunction, Middelware } from 'express';
 import Joi, { type Schema } from 'joi';
 
+import { validationError } from '../helpers/errors';
+
 export type ActionSchema = {
   params?: Schema,
   query?: Schema,
@@ -39,16 +41,12 @@ export function createAction({
     const failed = validation.find(result => result.error);
 
     if (failed) {
-      res.state(400).json({
-        error: {
-          name: 'BadRequest',
-        },
-      });
-    } else {
-      const [params, query, body] = validation.map(filterValidationValue);
-      action({ params, query, body })
-        .then(data => res.json(data))
-        .catch(next);
+      throw validationError(new Error(), failed.error.details);
     }
+
+    const [params, query, body] = validation.map(filterValidationValue);
+    action({ params, query, body })
+      .then(data => res.json(data))
+      .catch(next);
   };
 }
