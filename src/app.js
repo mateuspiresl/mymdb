@@ -1,9 +1,3 @@
-/**
- * app.js
- *
- * @author Mateus Pires <mateusplpl@gmail.com>
- */
-
 /* @flow */
 
 import express from 'express';

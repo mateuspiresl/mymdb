@@ -1,13 +1,9 @@
 /**
- * config.js
- *
  * Loads the configuration from /config considering the environment.
  *
  * Common configuration should be included in /config/default.json. Any other configuration should
  * be included in the corresponding environment file. To overwrite any without changing scripts,
  * create a file called /config/local.json and add the custom configuration there.
- *
- * @author Mateus Pires <mateusplpl@gmail.com>
  *
  * Based on https://github.com/mozilla/node-convict/blob/master/README.md
  */

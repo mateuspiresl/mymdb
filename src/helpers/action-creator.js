@@ -1,11 +1,3 @@
-/**
- * action-creator.js
- *
- * Creates an action (express middleware) from an action schema.
- *
- * @author Mateus Pires <mateusplpl@gmail.com>
- */
-
 /* eslint-disable import/prefer-default-export */
 /* @flow */
 
