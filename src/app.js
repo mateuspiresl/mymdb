@@ -15,6 +15,7 @@ import session from 'express-session';
 
 import config from './config';
 import moviesRouter from './controllers/movies';
+import genresRouter from './controllers/genres';
 import imagesRouter from './controllers/images';
 
 export default express()
@@ -36,6 +37,7 @@ export default express()
   })
 
   .use('/movies', moviesRouter)
+  .use('/genres', genresRouter)
   .use('/images', imagesRouter)
 
   // eslint-disable-next-line no-unused-vars

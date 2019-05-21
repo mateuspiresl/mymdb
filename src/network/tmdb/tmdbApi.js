@@ -52,6 +52,15 @@ export async function getMovie(movieId: number): Object {
   }
 }
 
+export async function getGenres() {
+  try {
+    const { data } = await commonHttp.get('genre/movie/list');
+    return data.genres;
+  } catch (error) {
+    throw handleErrors(error);
+  }
+}
+
 export async function getImage(
   imageName: string,
   original: boolean = true,

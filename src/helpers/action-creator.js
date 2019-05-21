@@ -14,7 +14,7 @@ import Joi, { type Schema } from 'joi';
 
 import { validationError } from './errors';
 
-export type ActionSchema<P = Object, Q = Object, B = Object> = {
+export type ActionSchema<P = void, Q = void, B = void> = {
   params?: Schema,
   query?: Schema,
   body?: Schema,
@@ -25,12 +25,12 @@ function filterValidationValue(result) {
   return result.value || {};
 }
 
-export function createAction({
+export function createAction<P, Q, B>({
   params: paramsSchema,
   query: querySchema,
   body: bodySchema,
   action,
-}: ActionSchema<>): Middelware {
+}: ActionSchema<P, Q, B>): Middelware {
   return (req: $Request, res: $Response, next: NextFunction): void => {
     const validation = [
       paramsSchema ? Joi.validate(req.params, paramsSchema) : {},
