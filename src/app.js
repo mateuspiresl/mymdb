@@ -5,7 +5,6 @@ import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import session from 'express-session';
 
 import config from './config';
 import moviesRouter from './controllers/movies';
@@ -18,13 +17,6 @@ export default express()
   .use(cookieParser())
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
-  .use(
-    session({
-      resave: false,
-      saveUninitialized: true,
-      secret: config.secret,
-    }),
-  )
 
   .get('/', (req, res) => {
     res.send('Live!');

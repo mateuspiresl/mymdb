@@ -30,13 +30,6 @@ const config = convict({
     env: 'PORT',
     arg: 'port',
   },
-  secret: {
-    doc: 'The session secret.',
-    format: '*',
-    default: null,
-    env: 'SESSION_SECRET',
-    arg: 'session-secret',
-  },
   tmdb: {
     apiKey: {
       doc: 'The TMDb API key.',
