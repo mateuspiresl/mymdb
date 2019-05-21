@@ -14,11 +14,11 @@ import Joi, { type Schema } from 'joi';
 
 import { validationError } from './errors';
 
-export type ActionSchema = {
+export type ActionSchema<P = Object, Q = Object, B = Object> = {
   params?: Schema,
   query?: Schema,
   body?: Schema,
-  action: (params: Object, query: Object, body: Object) => Promise<Object>,
+  action: (inputs: { params: P, query: Q, body: B }) => Promise<Object>,
 };
 
 function filterValidationValue(result) {
@@ -30,7 +30,7 @@ export function createAction({
   query: querySchema,
   body: bodySchema,
   action,
-}: ActionSchema): Middelware {
+}: ActionSchema<>): Middelware {
   return (req: $Request, res: $Response, next: NextFunction): void => {
     const validation = [
       paramsSchema ? Joi.validate(req.params, paramsSchema) : {},
@@ -46,8 +46,13 @@ export function createAction({
 
     const [params, query, body] = validation.map(filterValidationValue);
 
-    action({ params, query, body })
-      .then(data => res.json(data))
+    action
+      .call({ req, res }, { params, query, body })
+      .then(data => {
+        if (!res.headersSent) {
+          res.json(data);
+        }
+      })
       .catch(next);
   };
 }

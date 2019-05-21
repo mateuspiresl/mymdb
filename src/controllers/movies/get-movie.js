@@ -6,7 +6,11 @@ import type { ActionSchema } from '../../helpers/action-creator';
 import * as tmdb from '../../network/tmdb';
 import { notFoundError } from '../../helpers/errors';
 
-const actionCreator: ActionSchema = {
+type Params = {
+  id: number,
+};
+
+const actionCreator: ActionSchema<Params> = {
   params: {
     id: Joi.number()
       .min(0)

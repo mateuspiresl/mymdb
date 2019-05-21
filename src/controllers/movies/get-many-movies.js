@@ -5,7 +5,12 @@ import Joi from 'joi';
 import type { ActionSchema } from '../../helpers/action-creator';
 import * as tmdb from '../../network/tmdb';
 
-const actionCreator: ActionSchema = {
+type Query = {
+  title: string,
+  page: number,
+};
+
+const actionCreator: ActionSchema<void, Query> = {
   query: {
     title: Joi.string(),
     page: Joi.number().min(1),
