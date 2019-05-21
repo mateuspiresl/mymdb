@@ -7,6 +7,7 @@
 /* @flow */
 
 import express from 'express';
+import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -16,6 +17,7 @@ import config from './config';
 import moviesRouter from './controllers/movies';
 
 export default express()
+  .use(cors())
   .use(compression())
   .use(cookieParser())
   .use(bodyParser.urlencoded({ extended: true }))
@@ -36,11 +38,17 @@ export default express()
 
   // eslint-disable-next-line no-unused-vars
   .use((error, req, res, next) => {
-    const { statusCode, ...errorData } = error;
+    const { statusCode, handled, ...errorData } = error;
 
-    if (statusCode || config.env !== 'production') {
-      res.status(error.statusCode || 500).json(errorData);
+    res.status(statusCode || 500);
+
+    if (handled || config.env !== 'production') {
+      if (handled) {
+        res.json(errorData);
+      } else {
+        res.send(error.message);
+      }
     } else {
-      res.status(500).send('Server Error');
+      res.send('Server Error');
     }
   });

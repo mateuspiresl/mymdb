@@ -12,7 +12,7 @@
 import type { $Request, $Response, NextFunction, Middelware } from 'express';
 import Joi, { type Schema } from 'joi';
 
-import { validationError } from '../helpers/errors';
+import { validationError } from './errors';
 
 export type ActionSchema = {
   params?: Schema,
@@ -45,6 +45,7 @@ export function createAction({
     }
 
     const [params, query, body] = validation.map(filterValidationValue);
+
     action({ params, query, body })
       .then(data => res.json(data))
       .catch(next);

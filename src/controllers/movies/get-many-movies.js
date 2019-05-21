@@ -10,14 +10,10 @@ const actionCreator: ActionSchema = {
     title: Joi.string(),
     page: Joi.number().min(1),
   },
-  async action({ query }) {
-    if (query.title) {
-      const { data } = await tmdb.searchMovies(query.title, query.page);
-      return data;
-    }
-
-    const { data } = await tmdb.getPopularMovies(query.page);
-    return data;
+  action({ query }) {
+    return query.title
+      ? tmdb.searchMovies(query.title, query.page)
+      : tmdb.getPopularMovies(query.page);
   },
 };
 
