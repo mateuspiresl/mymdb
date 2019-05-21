@@ -56,6 +56,13 @@ const config = convict({
       env: 'TMBD_URL',
       arg: 'tmdb-url',
     },
+    imageBaseUrl: {
+      doc: 'The TMDb base URL.',
+      format: '*',
+      default: null,
+      env: 'TMBD_IMAGE_URL',
+      arg: 'tmdb-image-url',
+    },
     requestTimeout: {
       doc: 'The request timeout.',
       format: 'nat',
