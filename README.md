@@ -1,4 +1,4 @@
-# MyMDb (ArchTouch Test)
+# MyMDb (ArcTouch Test)
 
 ## Architecture​
 
