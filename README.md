@@ -1,4 +1,4 @@
-# MyMDb (ArcTouch Test)
+# MyMDb
 
 This project is the back end for the [MyMDb application](https://mymdb-front-mpl.herokuapp.com/). Running [here](https://mymdb-mpl.herokuapp.com/).
 
