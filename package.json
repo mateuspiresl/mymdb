@@ -6,7 +6,7 @@
   "author": "Mateus Pires <mateusplpl@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn build && node bin/www",
+    "start": "node bin/www",
     "build": "babel src -d build",
     "dev": "nodemon --exec babel-node server.js",
     "postinstall": "yarn build"
