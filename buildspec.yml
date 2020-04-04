@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - npm install -g yarn
+      - yarn install
+  build:
+    commands:
+      - yarn build
+  post_build:
+    commands:
+      - yarn install --production --ignore-scripts --prefer-offline
+  artifacts:
+    files:
+      - bin/*
+      - build/*
+      - node_modules/*
