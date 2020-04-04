@@ -13,8 +13,9 @@ phases:
   post_build:
     commands:
       - yarn install --production --ignore-scripts --prefer-offline
-  artifacts:
-    files:
-      - bin/*
-      - build/*
-      - node_modules/*
+
+artifacts:
+  files:
+    - bin/*
+    - build/*
+    - node_modules/*
