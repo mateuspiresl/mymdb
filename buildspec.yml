@@ -13,10 +13,13 @@ phases:
   post_build:
     commands:
       - yarn install --production --ignore-scripts --prefer-offline
+      - mkdir target
+      - mv .ebextensions target
+      - mv bin target
+      - mv node_modules target
+      - mv build target
 
 artifacts:
+  base-directory: 'target'
   files:
-    - bin/*
-    - build/**/*
-    - node_modules/**/*
-    - .ebextensions/**/*
+    - '**/*'
