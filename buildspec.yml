@@ -20,3 +20,4 @@ artifacts:
     - bin/*
     - build/**/*
     - node_modules/**/*
+    - .ebextensions/**/*
