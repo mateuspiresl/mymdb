@@ -16,6 +16,7 @@ phases:
       - mkdir target
       - mv .ebextensions target
       - mv bin target
+      - mv config target
       - mv node_modules target
       - mv build target
 
