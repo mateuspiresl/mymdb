@@ -19,4 +19,3 @@ artifacts:
     - bin/*
     - build/**/*
     - node_modules/**/*
-    - package.json
