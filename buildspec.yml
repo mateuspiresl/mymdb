@@ -13,6 +13,7 @@ phases:
   post_build:
     commands:
       - yarn install --production --ignore-scripts --prefer-offline
+      - ls -la
 
 artifacts:
   files:
